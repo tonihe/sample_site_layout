@@ -48,8 +48,9 @@
     <body onload="ajaxCall()">	
     <section class="season-desc">
 
-    <h3>Locations:</h3>
+    <h3>Locations:</h3> <!-- put user current location here hehe -->
     
+
     <div class="container">
     
     
@@ -58,9 +59,31 @@
                 <input id="getCountry" name="getCountry" class="col" type="text" value="" onchange="getCountry(this.value)" placeholder="enter a country">
             </div>
             <div class="col">
-                <select id="sel_country" onchange="getValue(this.value)">
-                    <option value=''>Select Country</option>
+                <select id="sel_country" class="col" onchange="getValue(this.value)">
+                    <option value="">Please Input Country</option>
                   </select>
+            </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col" id="cur_country">
+
+              </div>
+              <div class="col" id="sel_airport">
+            
+              </div>
+            </div>
+
+  
+
+
+          <!-- <div class="row">
+            <div class="col" id="lat">
+              1 of 2 - lorem ipsum some things here la la la 
+            </div>
+            <div class="col" id="lon">
+              2 of 2 - lorem ipsum some things here la la la 
             </div>
           </div>
 
@@ -72,18 +95,16 @@
               <div class="col">
                 2 of 2 - lorem ipsum some things here la la la 
               </div>
-            </div>
-  
+            </div> -->
 
 
-          <div class="row">
-            <div class="col">
-              1 of 2 - lorem ipsum some things here la la la 
+            <div id="moar-info">
+
+
+
+
             </div>
-            <div class="col">
-              2 of 2 - lorem ipsum some things here la la la 
-            </div>
-          </div>
+
         </div>
         
     </section>
@@ -112,12 +133,82 @@
     
     selected_country = x; 
     
-    console.log(selected_country);
+    console.log(selected_country); // for test logging ;D
     
 
     ajaxCall();
+
+    document.getElementById('cur_country').innerHTML = selected_country; 
+
     return selected_country; 
-    }    
+
+    } 
+
+
+// function get Airport -- 
+
+    function getValue(x){
+    
+    if(x != ""){
+    var selected_airport = x; 
+
+    document.getElementById("sel_airport").innerHTML = x; 
+    getDetailedInfo(x)  
+    console.log(x);
+    
+    }
+
+    function getDetailedInfo(x){
+
+      var airport_info = x; 
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open('GET', 'https://raw.githubusercontent.com/tonihe/json_album/master/loc_sample.json');
+      ourRequest.send();
+
+      ourRequest.onload = function (){
+        var arr = JSON.parse(ourRequest.responseText);
+
+        var info = "";
+        var i; 
+
+        for(i = 0; i < arr.length; i++){
+          if(arr[i].name == x){
+
+
+            info = "Airport Code: "  + arr[i].code + "\n <br>" 
+            + "Lat: " + arr[i].lat + "\n <br>"
+            + "Lon: " + arr[i].lon + "\n <br>"
+            + "City: " + arr[i].city + "\n <br>"
+            + "Country: " + arr[i].country + "\n <br>"
+            + "Phone: " + arr[i].phone + "\n <br>"
+            + "Website: " + arr[i].url + "\n <br>"
+            + "Runway Length: " + arr[i].runway_length + "\n <br>"
+            + "Direct Flights: " + arr[i].direct_flights + "\n <br>"
+            + "# of Carrers: " + arr[i].carriers + "\n <br>";
+
+
+            console.log(arr[i].code);
+            console.log(arr[i].lat);
+            console.log(arr[i].lon);
+            console.log(arr[i].city);
+            console.log(arr[i].country);
+            console.log(arr[i].phone);
+            console.log(arr[i].url);
+            console.log(arr[i].runway_length);
+            console.log(arr[i].direct_flights);
+            console.log(arr[i].carriers);
+
+           
+          }
+        }
+       
+        document.getElementById("moar-info").innerHTML = info; 
+
+      }
+
+    }
+
+    }
 
   // ajaxCall to fill up the selector at first // 
     function ajaxCall() {
@@ -132,9 +223,12 @@
     var data_str = "";
     var i;
 
+    // default ask for select a[0];
+    data_str += '<option value="">' + " Select Airport " + '</option>' + '<br>';
     for (i = 0; i < arr.length; i++) {
 
     if(arr[i].country == selected_country){ 
+    
     data_str += '<option value="' + arr[i].name + '">' + arr[i].code + " " + arr[i].name + '</option>' +
       arr[i].name + '<br>';
   }
