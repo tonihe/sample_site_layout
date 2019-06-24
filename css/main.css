@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --parallax-bg-color: #003152; 
 }
 
 
@@ -46,90 +47,13 @@ li {
     justify-content: space-between; 
 }
 
-.box {
-    width: 50vw; 
-    height: 50vh; 
-    max-width: 100%; 
-    max-height: 100%; 
-    background-color: var(--primary-color);
-    color: var(--overlay-color);
-    font-family: 'Poppins', sans-serif;
-    border: 5px solid white; 
-    
-}
 
-.box > h3, p {
-    margin-top: 25%; 
-}
-
-#aside-one {
-
-    display: flex; 
-    justify-content: center; 
-    background-repeat: no-repeat; 
-    background-image:url('/img/berlin-banner.jpeg');
-    background-size: 100%;
-    
-}
-
-#aside-two {
-    display: flex; 
-    justify-content: center; 
-    background-color: var(--overlay-color);
-}
-
-#aside-three {
-    display: flex; 
-    justify-content: center; 
-    background-color: var(--overlay-color);
-
-}
-
-#aside-four {
-
-    display: flex; 
-    justify-content: center; 
-    background-repeat: no-repeat; 
-    background-image:url('/img/berlin-fernsehturm.jpeg');
-    background-size: 100%;
-
-}
-
-#aside-five {
-    display: flex; 
-    justify-content: center; 
-    background-repeat: no-repeat; 
-    background-image:url('/img/berlin-spree.jpeg');
-    background-size: 100%;
-}
-
-#aside-six {
-    display: flex; 
-    justify-content: center; 
-    background-color: var(--overlay-color);
-
-}
-
-#aside-seven {
-    display: flex; 
-    justify-content: center; 
-    background-color: var(--overlay-color);
-
-}
-
-#aside-eight {
-
-    display: flex; 
-    justify-content: center; 
-    background-repeat: no-repeat; 
-    background-image:url('/img/mountainrange.jpeg');
-    background-size: 100%;
-
-}
 /* CORE STYLES OF HAMBURGER MENU */
 :root {
+    --primary-text-color: white; 
     --primary-color: #003152;
-    --overlay-color: rgba(255, 255, 255, 0.95);
+    /* --overlay-color: rgba(255, 255, 255, 0.95); */ /* original overlay color */
+    --overlay-color: rgb(0,49,83, 1); 
     --menu-speed: 0.75s;
   }
   
@@ -334,7 +258,7 @@ li {
   
   .menu-wrap .menu > div > div > ul > li {
     list-style: none;
-    color: black;
+    color: var(--primary-text-color);
     font-size: 1.5rem;
     padding: 1rem;
   }
