@@ -5,10 +5,22 @@
     --parallax-bg-color: #003152; 
 }
 
+a {
+  text-decoration: none; 
+}
 
-a:hover{
+a:visited {
+  text-decoration: none; 
+}
+
+a:hover {
     text-decoration: none; 
 }
+/* fix for <a> underline */ 
+a:link {
+  text-decoration: none!important;
+}
+
 
 h1 {
     color: #003152;
