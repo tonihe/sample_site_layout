@@ -73,30 +73,9 @@
               </div>
             </div>
 
-  
 
 
-          <!-- <div class="row">
-            <div class="col" id="lat">
-              1 of 2 - lorem ipsum some things here la la la 
-            </div>
-            <div class="col" id="lon">
-              2 of 2 - lorem ipsum some things here la la la 
-            </div>
-          </div>
-
-
-          <div class="row">
-              <div class="col">
-                1 of 2 - lorem ipsum some things here la la la 
-              </div>
-              <div class="col">
-                2 of 2 - lorem ipsum some things here la la la 
-              </div>
-            </div> -->
-
-
-            <div id="moar-info">
+            <div id="detailed-info">
             </div>
 
         </div>
@@ -118,6 +97,7 @@
 
 
       var selected_country = "";
+     
 
   
   // getting the value of the text input --
@@ -141,68 +121,74 @@
 
 // function get Airport -- 
 
-    function getValue(x){
+      function getValue(x){
     
-    if(x != ""){
-    var selected_airport = x; 
+        if(x != ""){
+        var selected_airport = x; 
 
-    document.getElementById("sel_airport").innerHTML = x; 
-    getDetailedInfo(x)  
-    console.log(x);
+        document.getElementById("sel_airport").innerHTML = x; 
+        getDetailedInfo(x)  
+        console.log(x);
     
-    }
-
-    function getDetailedInfo(x){
-
-      var airport_info = x; 
-      var ourRequest = new XMLHttpRequest();
-      ourRequest.open('GET', 'https://raw.githubusercontent.com/tonihe/json_album/master/loc_sample.json');
-      ourRequest.send();
-
-      ourRequest.onload = function (){
-        var arr = JSON.parse(ourRequest.responseText);
-
-        var info = "";
-        var i; 
-
-        for(i = 0; i < arr.length; i++){
-          if(arr[i].name == x){
-
-
-            info = "Airport Code: "  + arr[i].code + "\n <br>" 
-            + "Lat: " + arr[i].lat + "\n <br>"
-            + "Lon: " + arr[i].lon + "\n <br>"
-            + "City: " + arr[i].city + "\n <br>"
-            + "Country: " + arr[i].country + "\n <br>"
-            + "Phone: " + arr[i].phone + "\n <br>"
-            + "Website: " + arr[i].url + "\n <br>"
-            + "Runway Length: " + arr[i].runway_length + "\n <br>"
-            + "Direct Flights: " + arr[i].direct_flights + "\n <br>"
-            + "# of Carrers: " + arr[i].carriers + "\n <br>";
-
-
-            console.log(arr[i].code);
-            console.log(arr[i].lat);
-            console.log(arr[i].lon);
-            console.log(arr[i].city);
-            console.log(arr[i].country);
-            console.log(arr[i].phone);
-            console.log(arr[i].url);
-            console.log(arr[i].runway_length);
-            console.log(arr[i].direct_flights);
-            console.log(arr[i].carriers);
-
-           
-          }
-        }
-       
-        document.getElementById("moar-info").innerHTML = info; 
-
       }
 
-    }
+          function getDetailedInfo(x){
 
-    }
+          var airport_info = x; 
+          var ourRequest = new XMLHttpRequest();
+          ourRequest.open('GET', 'https://raw.githubusercontent.com/tonihe/json_album/master/loc_sample.json');
+          ourRequest.send();
+
+          ourRequest.onload = function (){
+            var arr = JSON.parse(ourRequest.responseText);
+            var info = "";
+            var i; 
+
+            for(i = 0; i < arr.length; i++){
+              if(arr[i].name == x){
+
+                lat = arr[i].lat; 
+                lon = arr[i].lon; 
+
+                info = "Airport Code: "  + arr[i].code + "\n <br>" 
+                + "Lat: " + arr[i].lat + "\n <br>"
+                + "Lon: " + arr[i].lon + "\n <br>"
+                + "City: " + arr[i].city + "\n <br>"
+                + "Country: " + arr[i].country + "\n <br>"
+                + "Phone: " + arr[i].phone + "\n <br>"
+                + "Website: " + arr[i].url + "\n <br>"
+                + "Runway Length: " + arr[i].runway_length + "\n <br>"
+                + "Direct Flights: " + arr[i].direct_flights + "\n <br>"
+                + "# of Carrers: " + arr[i].carriers + "\n <br>";
+
+                  console.log(arr[i].code);
+                  console.log(arr[i].lat);
+                  console.log(arr[i].lon);
+                  console.log(arr[i].city);
+                  console.log(arr[i].country);
+                  console.log(arr[i].phone);
+                  console.log(arr[i].url);
+                  console.log(arr[i].runway_length);
+                  console.log(arr[i].direct_flights);
+                  console.log(arr[i].carriers);   
+                                    }
+                                          } 
+       
+        document.getElementById("detailed-info").innerHTML = info; 
+        initialize(lat, lon);
+                                          }
+
+                                      }
+                              }
+
+  function initialize(lat, lon) {
+  var mapDiv = document.getElementById('map');
+  var map = new google.maps.Map(mapDiv, {
+    center: new google.maps.LatLng(lat, lon),
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+}                        
 
   // ajaxCall to fill up the selector at first // 
     function ajaxCall() {
@@ -249,7 +235,7 @@
             }
           </script>
         <!-- add working API key here when necessary -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=hahano&callback=initMap"
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1nFYdPTMhVObTdSttAolFuOecn3VINc&callback=initMap"
   type="text/javascript"></script>
               
               </html>
