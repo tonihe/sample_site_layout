@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="your website content">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>FORTUNA ADIUVAT</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet"  type="text/css" href="css/main.css">
+        <link rel="stylesheet"  type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet"  type="text/css" href="css/parallax.css">
+       
+
+        <!-- 
+        JS
+        ============================================== -->
+        <script src="https://kit.fontawesome.com/29e8dab5b5.js"></script>
+      
+        <style>
+                /* Always set the map height explicitly to define the size of the div
+                 * element that contains the map. */
+                #map {
+                  height: 100%;
+                }
+                /* Optional: Makes the sample page fill the window. */
+                html, body {
+                  height: 100%;
+                  margin: 0;
+                  padding: 0;
+                }
+              </style>
+    </head>
+
+    <body onload="ajaxCall()">	
+    <section class="season-desc">
+
+    <h3>Locations:</h3>
+    
+    <div class="container">
+    
+    
+    <div class="row">
+            <div class="col">
+                <input id="getCountry" class="col" type="text" onchange="getValue(this.value)" placeholder="enter a country"></input> 
+            </div>
+            <div class="col">
+                <select id="sel_country" onchange="getValue(this.value)">
+                    <option value=''>Select Country</option>
+                  </select>
+            </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col">
+                1 of 2 - lorem ipsum some things here la la la 
+              </div>
+              <div class="col">
+                2 of 2 - lorem ipsum some things here la la la 
+              </div>
+            </div>
+  
+
+
+          <div class="row">
+            <div class="col">
+              1 of 2 - lorem ipsum some things here la la la 
+            </div>
+            <div class="col">
+              2 of 2 - lorem ipsum some things here la la la 
+            </div>
+          </div>
+        </div>
+        
+    </section>
+
+    <div id="map"></div>
+
+    <section class="season-desc">
+
+        
+    </section>
+          
+    
+    </body>
+
+
+    <script type="text/javascript">
+
+    function ajaxCall() {
+
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'https://raw.githubusercontent.com/tonihe/json_album/master/loc_sample.json');
+    ourRequest.send();
+
+    ourRequest.onload = function () {
+    var arr = JSON.parse(ourRequest.responseText);
+  
+    
+      selected_country = "Germany";
+
+      var data_str = "";
+      var i;
+
+    for (i = 0; i < arr.length; i++) {
+
+    if(arr[i].country == selected_country){ 
+    data_str += '<option value="' + arr[i].name + '">' + arr[i].code + " " + arr[i].name + '</option>' +
+      arr[i].name + '<br>';
+  }
+
+}
+
+  document.getElementById("sel_country").innerHTML = data_str;
+
+
+}
+}
+
+
+
+     // map needs working GoogleAPI Key to be enabled, otherwise working. 
+            var map;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 49.246292, lng: -123.116226},
+                zoom: 12
+              });
+            }
+          </script>
+        <!-- add working API key here when necessary -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=hahano&callback=initMap"
+  type="text/javascript"></script>
+              
+              </html>
