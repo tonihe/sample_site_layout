@@ -54,6 +54,7 @@ li {
     background-color: var(--primary-color);
     color: var(--overlay-color);
     font-family: 'Poppins', sans-serif;
+    border: 5px solid white; 
     
 }
 
