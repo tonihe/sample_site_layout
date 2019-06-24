@@ -55,7 +55,7 @@
     
     <div class="row">
             <div class="col">
-                <input id="getCountry" class="col" type="text" onchange="getValue(this.value)" placeholder="enter a country"></input> 
+                <input id="getCountry" name="getCountry" class="col" type="text" value="" onchange="getCountry(this.value)" placeholder="enter a country">
             </div>
             <div class="col">
                 <select id="sel_country" onchange="getValue(this.value)">
@@ -101,6 +101,25 @@
 
     <script type="text/javascript">
 
+
+      var selected_country = "";
+
+  
+  // getting the value of the text input --
+
+
+  function getCountry(x) {
+    
+    selected_country = x; 
+    
+    console.log(selected_country);
+    
+
+    ajaxCall();
+    return selected_country; 
+    }    
+
+  // ajaxCall to fill up the selector at first // 
     function ajaxCall() {
 
     var ourRequest = new XMLHttpRequest();
@@ -109,12 +128,9 @@
 
     ourRequest.onload = function () {
     var arr = JSON.parse(ourRequest.responseText);
-  
-    
-      selected_country = "Germany";
 
-      var data_str = "";
-      var i;
+    var data_str = "";
+    var i;
 
     for (i = 0; i < arr.length; i++) {
 
@@ -129,6 +145,8 @@
 
 
 }
+
+
 }
 
 
